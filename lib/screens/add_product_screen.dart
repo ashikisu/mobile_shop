@@ -30,6 +30,7 @@ class AddProductScreen extends StatelessWidget {
                 const SizedBox(height: 15,),
 
                 TextField(
+                  controller: control.productNameController,
                   decoration: InputDecoration(
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(20),
@@ -42,6 +43,7 @@ class AddProductScreen extends StatelessWidget {
                 const SizedBox(height: 15,),
 
                 TextField(
+                  controller: control.productDescriptionController,
                   decoration: InputDecoration(
                     border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(20),
@@ -55,6 +57,7 @@ class AddProductScreen extends StatelessWidget {
                 ),
                 const SizedBox(height: 15,),
                 TextField(
+                  controller: control.productImageUrlController,
                   decoration: InputDecoration(
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(20),
@@ -66,6 +69,7 @@ class AddProductScreen extends StatelessWidget {
                 ),
                 const SizedBox(height: 15,),
                 TextField(
+                  controller: control.productPriceController,
                   decoration: InputDecoration(
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(20),
@@ -79,23 +83,35 @@ class AddProductScreen extends StatelessWidget {
                 Row(
                   children: [
                     Flexible(child: DropDownBtn(
-                      items: const ['Cat1', 'Cat Brand 1'],
-                      selectedItemText: 'Category',
-                      onSelected: (selectedValue) {},
+                      items: const ['Smart Phone', 'Tablet'],
+                      selectedItemText: control.category,
+                      onSelected: (selectedValue) {
+                        control.category=selectedValue?? 'Unknown';
+                        control.update();
+                      },
                     )),
                     Flexible(child: DropDownBtn(
-                      items: const ['Cat2', 'Brand 2'],
-                      selectedItemText: 'Brand',
-                      onSelected: (selectedValue) {},
+                      items: const ['Apple ', 'Vivo','Oppo',' Xiaomi','Techno', 'Realme'],
+                      selectedItemText: control.brand,
+                      onSelected: (selectedValue) {
+                        control.brand=selectedValue?? 'UnKnown';
+                        control.update();
+                      },
                     )),
                   ],
                 ),
                 const Text("Offer Product ? "),
 
                 DropDownBtn(items: const ['true', 'false'],
-                  selectedItemText: 'Offer ? ',
-                  onSelected: (selectedValue) {},),
-                ElevatedButton(onPressed: () {},
+                  selectedItemText: control.offer.toString(),
+                  onSelected: (selectedValue) {
+
+                  control.offer= bool.tryParse(selectedValue ?? 'false')?? false;
+                  control.update();
+                  },),
+                ElevatedButton(onPressed: () {
+                  control.addProduct();
+                },
                     child: const Text(
                       "Add Product", style: TextStyle(color: Colors.purple),))
               ],

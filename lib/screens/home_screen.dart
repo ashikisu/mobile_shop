@@ -16,12 +16,18 @@ class HomeScreen extends StatelessWidget {
       ),
 
       body: ListView.builder(
-          itemCount: 10,
+          itemCount: control.products.length,
           itemBuilder: (context, index) {
-            return const ListTile(
-              title: Text('Item'),
-              subtitle: Text('Price:10'),
-              trailing: Icon(Icons.delete),
+            return  ListTile(
+              title: Text(control.products[index].name?? ''),
+              subtitle: Text((control.products[index].price ?? 0).toString()),
+              trailing: IconButton(
+                icon: Icon(Icons.delete),
+                onPressed: (){
+                  control.deleteProduc(control.products[index].id ?? '');
+
+                },
+              )
             );
           }
 

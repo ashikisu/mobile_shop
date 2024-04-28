@@ -6,9 +6,9 @@ import 'package:mobile_shop/screens/home_screen.dart';
 import 'package:get/get.dart';
 
 
-void main() {
+Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  Firebase.initializeApp(options:firebaseOptions);
+  await Firebase.initializeApp(options:firebaseOptions);
   Get.put(HomeController());
   runApp(const MyApp());
 }
@@ -25,7 +25,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const HomeScreen(),
+      home: const  HomeScreen(),
     );
   }
 }
